@@ -115,8 +115,8 @@ def calc_Q(daily_q, isotope_df, column):
     monthly_q['days_in_month'] = days_in_month
     isotope_df['Qi'] = isotope_sample_q
     for i in range(len(isotope_df['Qi'])):
-        if np.isnan(isotope_df['Qi'].iloc[i]):
-            isotope_df.loc[i, 'Qi'] = monthly_q.iloc[monthly_q.index == isotope_df.loc[i, 'month']]
+        if np.isnan(isotope_df['Qi'][i]):
+            isotope_df.loc[i, 'Qi'] = monthly_q.loc[monthly_q['month'] == isotope_df['month'][i]].iloc[0]
     return monthly_q, isotope_df
   
 for site in [x for x in sites if x not in ['TECR', 'BIGC', 'WLOU']]:
